@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "SniucE3mXAQ=",
+  "success": true,
+  "projectFilePath": "/Users/zacharygoldberg/WatchVaultBE/WatchVaultBE/WatchVaultAPI/WatchVaultAPI.csproj",
+  "expectedPackageFiles": [
+    "/Users/zacharygoldberg/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/Users/zacharygoldberg/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
