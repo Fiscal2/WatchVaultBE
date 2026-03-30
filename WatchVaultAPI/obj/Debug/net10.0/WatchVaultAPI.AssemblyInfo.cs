@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WatchVaultAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68fb11010f93cd8991cb199d7dc7cad71d1cb3e9")]
 [assembly: System.Reflection.AssemblyProductAttribute("WatchVaultAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WatchVaultAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
