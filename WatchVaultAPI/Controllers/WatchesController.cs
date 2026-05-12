@@ -15,9 +15,22 @@ public class WatchesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] string? search, [FromQuery] string? brand)
     {
-        var watches = await _watchService.GetAllAsync();
+        var watches = await _watchService.GetAllAsync(search, brand);
         return Ok(watches);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var watch = await _watchService.GetByIdAsync(id);
+
+        if (watch is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(watch);
     }
 }

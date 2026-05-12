@@ -14,9 +14,27 @@ public class WatchService : IWatchService
         _context = context;
     }
 
-    public async Task<List<WatchDto>> GetAllAsync()
+    public async Task<List<WatchDto>> GetAllAsync(string? search = null, string? brand = null)
     {
-        return await _context.Watches
+        var query = _context.Watches.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(w =>
+                w.Brand.Contains(search) ||
+                w.Model.Contains(search) ||
+                (w.ReferenceNumber != null && w.ReferenceNumber.Contains(search)));
+        }
+
+        if (!string.IsNullOrWhiteSpace(brand))
+        {
+            var normalizedBrand = brand.Trim().ToLower();
+
+            query = query.Where(w =>
+                w.Brand.ToLower() == normalizedBrand);
+        }
+
+        return await query
             .Select(w => new WatchDto
             {
                 Id = w.Id,
@@ -32,5 +50,26 @@ public class WatchService : IWatchService
                 Description = w.Description
             })
             .ToListAsync();
+    }
+
+    public async Task<WatchDto?> GetByIdAsync(int id)
+    {
+        return await _context.Watches
+            .Where(w => w.Id == id)
+            .Select(w => new WatchDto
+            {
+                Id = w.Id,
+                Brand = w.Brand,
+                Model = w.Model,
+                ReferenceNumber = w.ReferenceNumber,
+                RetailPrice = w.RetailPrice,
+                ImageUrl = w.ImageUrl,
+                Movement = w.Movement,
+                YearOfProduction = w.YearOfProduction,
+                CaseMaterial = w.CaseMaterial,
+                CaseDiameter = w.CaseDiameter,
+                Description = w.Description
+            })
+            .FirstOrDefaultAsync();
     }
 }
