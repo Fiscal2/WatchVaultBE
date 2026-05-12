@@ -195,3 +195,8 @@ $RECYCLE.BIN/
 
 # WPF temp projects
 *wpftmp.*
+
+# SQLite local database
+*.db
+*.db-shm
+*.db-wal

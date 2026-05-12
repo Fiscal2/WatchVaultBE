@@ -40,41 +40,7 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated();
-
-    if (!db.Watches.Any())
-    {
-        db.Watches.AddRange(
-            new Watch
-            {
-                Brand = "Rolex",
-                Model = "Submariner",
-                ReferenceNumber = "126610LN",
-                RetailPrice = 10250m,
-                ImageUrl = "https://example.com/submariner.jpg",
-                Movement = "Automatic",
-                YearOfProduction = "2020 - Present",
-                CaseMaterial = "Oystersteel",
-                CaseDiameter = "41 mm",
-                Description = "Classic Rolex dive watch."
-            },
-            new Watch
-            {
-                Brand = "Omega",
-                Model = "Speedmaster Professional",
-                ReferenceNumber = "310.30.42.50.01.001",
-                RetailPrice = 8000m,
-                ImageUrl = "https://example.com/speedmaster.jpg",
-                Movement = "Manual",
-                YearOfProduction = "2021 - Present",
-                CaseMaterial = "Steel",
-                CaseDiameter = "42 mm",
-                Description = "The Moonwatch."
-            }
-        );
-
-        db.SaveChanges();
-    }
+    SeedData.Initialize(db);
 }
 
 app.Run();
