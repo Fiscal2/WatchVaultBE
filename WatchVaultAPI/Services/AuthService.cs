@@ -9,10 +9,12 @@ namespace WatchVaultAPI.Services;
 public class AuthService : IAuthService
 {
     private readonly AppDbContext _context;
+    private readonly ITokenService _tokenService;
 
-    public AuthService(AppDbContext context)
+    public AuthService(AppDbContext context, ITokenService tokenService)
     {
         _context = context;
+        _tokenService = tokenService;
     }
 
     public async Task<AuthResponse> RegisterAsync(RegisterRequest request)
@@ -94,10 +96,14 @@ public class AuthService : IAuthService
             };
         }
 
+        var (token, expiresAtUtc) = _tokenService.CreateToken(user);
+
         return new AuthResponse
         {
             Success = true,
-            Message = "Login successful."
+            Message = "Login successful.",
+            Token = token,
+            ExpiresAtUtc = expiresAtUtc
         };
     }
 }

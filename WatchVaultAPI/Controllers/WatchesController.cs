@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using WatchVaultAPI.Interfaces;
 
 namespace WatchVaultAPI.Controllers;
@@ -32,5 +33,20 @@ public class WatchesController : ControllerBase
         }
 
         return Ok(watch);
+    }
+
+    [Authorize]
+    [HttpGet("protected-test")]
+    public IActionResult ProtectedTest()
+    {
+        var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+
+        return Ok(new
+        {
+            message = "You are authenticated.",
+            userId,
+            email
+        });
     }
 }
